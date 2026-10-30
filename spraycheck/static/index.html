@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="ta"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>ஸ்ப்ரே செக்</title>
+<link rel="stylesheet" href="style.css">
+</head><body>
+<div class="wrap">
+<div class="tab"></div>
+<div class="chip" id="chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="10" cy="10" r="6"/><path d="M15 15l5 5M10 8v4M8 10h4"/></svg>எழுத்து வாசிப்பு (OCR)</div>
+<div class="ph" id="ph">
+
+<div class="sc on" id="s-scan">
+ <button class="bk" onclick="go('home')">‹ பின்செல்</button>
+ <h1>பூச்சிக்கொல்லி பாக்கெட்டை ஸ்கேன் செய்யுங்கள்</h1>
+ <div class="cam" id="cam"><span class="c c1"></span><span class="c c2"></span><span class="c c3"></span><span class="c c4"></span><div class="hand"></div>
+  <div class="pk" id="pk"><h3 class="ob"><span id="pnm">பேடி-ஷீல்ட்</span><small id="pvl">500 கிராம்</small></h3><p class="ob" id="pl">அடங்கியது: டிரைசைக்ளசோல் 75% WP</p><i></i><i></i><i></i></div></div>
+ <button class="cap" onclick="$('file').click()"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><path d="M4 8h3l2-3h6l2 3h3v11H4z"/><circle cx="12" cy="13" r="3.5"/></svg>படம் எடு</button>
+ <input type="file" id="file" accept="image/*" capture="environment" hidden onchange="photo(this)">
+ <p class="hint">தடைசெய்யப்பட்ட மருந்துகள் மற்றும் அளவைச் சரிபார்க்க தெளிவான புகைப்படம் எடுக்கவும்.</p>
+ <div class="row"><input id="tank" type="number" placeholder="டாங்க் அளவு (லி)" value="10"><select id="crop"><option>பயிர் வகையைத் தேர்ந்தெடுக்கவும்</option><option>நெல்</option><option>பருத்தி</option><option>நிலக்கடலை</option><option>காய்கறிகள்</option></select></div>
+ <p class="err" id="err"></p>
+ <div class="ln"><button onclick="sample()">▶ அடுத்த மாதிரி பாக்கெட்</button><span id="dl" class="sm"></span></div>
+ <details class="ln" style="display:block"><summary>✎ லேபிள் உரையைத் திருத்து (OCR காப்பு)</summary><textarea id="ocr" rows="3" placeholder="OCR உரை இங்கே தோன்றும். திருத்தி மீண்டும் சரிபார்க்கலாம்."></textarea><button class="btn" style="margin-top:8px" onclick="checkText()">உரையைச் சரிபார்</button></details>
+</div>
+
+<div class="sc" id="s-ban"><div class="ban">
+ <button class="bk" onclick="go('scan')" style="text-align:left">‹ பின்செல்</button>
+ <div class="t">தடை செய்யப்பட்ட பூச்சிக்கொல்லி எச்சரிக்கை</div>
+ <svg class="sh" viewBox="0 0 100 112"><path d="M50 4l42 16v34c0 26-18 44-42 54C26 98 8 80 8 54V20z" fill="#fff"/><rect x="45" y="30" width="10" height="36" rx="5" fill="#a01212"/><circle cx="50" cy="80" r="6" fill="#a01212"/></svg>
+ <h2>இது தமிழ்நாட்டில் தடை செய்யப்பட்டது</h2>
+ <div class="bx" id="bx"></div>
+</div></div>
+
+<div class="sc" id="s-dose">
+ <button class="bk" onclick="go('scan')">‹ பின்செல்</button>
+ <h1 style="display:flex;justify-content:space-between;align-items:center;gap:8px">அளவு கணக்கீடு<span style="width:42px;height:42px;flex:none;border-radius:10px;background:var(--g);display:flex;align-items:center;justify-content:center"><svg width="26" height="26" viewBox="0 0 24 24" fill="#fff"><path d="M12 21c0-6 2-9 8-11-1 6-3 9-8 11zM12 21C12 15 10 12 4 10c1 6 3 9 8 11z"/></svg></span></h1>
+ <div class="fld"><label>பூச்சிக்கொல்லி பெயர்</label><input id="pn"></div>
+ <p class="sm" id="ld" style="margin-top:-8px;color:var(--tx)"></p>
+ <div class="fld on"><label>டாங்க் அளவை உள்ளிடவும் (லிட்டர்)</label><input id="t2" type="number" value="10"></div>
+ <div class="fld on"><label>நிலப்பரப்பை உள்ளிடவும் (ஏக்கர்)</label><input id="ac" type="number" value="5" step="0.5"></div>
+ <button class="btn" onclick="calc()">கணக்கிடு</button>
+ <div class="res" id="res" style="display:none"><b id="rb"></b><div class="ta" id="rt"></div><button class="spk" onclick="say(doseTa)"><svg viewBox="0 0 24 24" fill="#fff"><path d="M3 9v6h4l5 4V5L7 9zM15 8c2 2 2 6 0 8M18 5c4 4 4 10 0 14" stroke="#fff" stroke-width="1.8" stroke-linecap="round" fill-opacity="1"/></svg></button></div>
+ <div class="exp" id="ex"></div>
+ <p class="sm" style="text-align:center;margin-top:10px">லேபிளில் உள்ள அளவு மட்டுமே கணக்கிடப்படுகிறது. தெரியவில்லை என்றால் வேளாண் அலுவலரிடம் கேளுங்கள். தண்ணீர்/ஏக்கர்: <input id="wa" type="number" value="200" style="width:64px;padding:3px 6px;font-size:12px;display:inline-block"> லி</p>
+</div>
+
+<div class="sc" id="s-home"><h1>ஸ்ப்ரே செக்</h1><div class="hi">பாக்கெட் படம் எடுங்கள் → தடை சரிபார்ப்பு → டாங்க் அளவு → தமிழ் குரல். 10 வினாடிகளில்.</div><button class="btn" onclick="go('scan')">பாக்கெட்டை ஸ்கேன் செய்</button><p class="sm">தடைப் பட்டியல் கடைசியாகச் சரிபார்க்கப்பட்டது: <span id="lv">…</span> (மாதிரித் தரவு; உண்மையான பயன்பாட்டிற்கு முன் அதிகாரப்பூர்வ தமிழ்நாடு அரசிதழில் சரிபார்க்கவும்)</p></div>
+<div class="sc" id="s-hist"><h1>வரலாறு</h1><div id="hl"></div></div>
+<div class="sc" id="s-prof"><h1>சுயவிவரம்</h1><div class="hi">விவசாயி மாதிரி சுயவிவரம் · மொழி: தமிழ் (குரல் இயக்கத்தில்)</div><button class="btn" onclick="try{localStorage.removeItem('sc')}catch(e){};renderH()">வரலாற்றை அழி</button></div>
+
+<div class="nav" id="nav"></div>
+</div></div>
+<script src="app.js"></script>
+</body></html>

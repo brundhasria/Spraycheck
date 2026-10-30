@@ -1,0 +1,12 @@
+{
+  "_note": "DEMO DATA. Verify against the official Tamil Nadu Gazette / CIB&RC notifications before any real use.",
+  "verified_on": "2026-10-15",
+  "verified_on_ta": "15 அக்டோபர் 2026",
+  "pesticides": [
+    {"en": "chlorpyrifos", "ta": "குளோர்பைரிபாஸ்"},
+    {"en": "monocrotophos", "ta": "மோனோகுரோட்டோபாஸ்"},
+    {"en": "endosulfan", "ta": "எண்டோசல்பான்"},
+    {"en": "phorate", "ta": "போரேட்"},
+    {"en": "methyl parathion", "ta": "மெத்தில் பாராதியான்"}
+  ]
+}
